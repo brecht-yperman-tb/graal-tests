@@ -16,9 +16,7 @@ public class TestGraalMap {
             Value value = context.eval("js", JS_CODE);
             Value result = value.execute();
             Map<String,Object> resultMap = result.as(Map.class);
-            assertThat(resultMap).hasEntrySatisfying("listProperty", testArray -> {
-                assertThat(testArray).asList().containsExactly("listValue");
-            });
+            assertThat(resultMap).extractingByKey("listProperty").asList().containsExactly("listValue");
         }
     }
 }
